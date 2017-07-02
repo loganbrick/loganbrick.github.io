@@ -1,0 +1,19 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0
+  background-color: #427BBC;
+}
+
+.intro {
+  background-color: #F9FAFB;
+  padding-bottom: 10px;
+}
+
+#map {
+  height: 80%;
+  width: 100%;
+  position: absolute;
+  margin: auto;
+  padding: 100px;
+}

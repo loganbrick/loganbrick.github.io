@@ -15,3 +15,6 @@
   Start Bootstrap was created by and is maintained by **[David Miller](http://davidmiller.io/), Owner of [Blackrock Digital](http://blackrockdigital.io/)**.
   * https://twitter.com/davidmillerskt
   * https://github.com/davidtmiller
+
+3. Snazzy Maps: Google Maps Styles
+  [Retro](https://snazzymaps.com/style/18/retro) **by Adam Krogh**
