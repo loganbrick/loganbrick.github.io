@@ -121,8 +121,8 @@ var markers = [];
 
     // Constructor to create a new map. Centering near my neighborhood in Bayview.
     map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 43.000026, lng: -90.137980},
-      zoom: 13,
+      center: {lat: 43.000828, lng: -87.902507},
+      zoom: 15,
       styles: styles,
     });
 
