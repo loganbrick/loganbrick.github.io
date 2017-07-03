@@ -23,6 +23,18 @@ html, body {
   opacity: 0.8;
 }
 
+.searchResult {
+  cursor: pointer;
+  border-style: solid;
+  padding: auto;
+  margin: 1em;
+  text-align: center;
+}
+
+.searchResult:hover {
+  background-color: #fff;
+}
+
 #map {
   height: 80%;
   width: 100%;

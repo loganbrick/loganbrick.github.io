@@ -33,7 +33,7 @@
         <input class="searchbar-input" placeholder="Search!" type="text" name="query" data-bind="value: searchQuery, valueUpdate: 'keyup'">
       </div>
       <ul class="sidebar-nav" data-bind="foreach: search">
-        <li data-bind="text: title"></li>
+        <li class="searchResult" data-bind="text: title, click: $root.openMarkerInfoWindow"></li>
       </ul>
     </div>
     <!-- /#sidebar-wrapper -->

@@ -3,8 +3,15 @@
 var map;
 // A variable to set whether the map is loaded
 var isMapsApiLoaded = false;
-// Create a blank array for all the markers of the places I love or loved.
-var markers = [];
+// Create a blank array for all the markers of the places I have chosen.
+var googleMarkers = [];
+// Create a populate marker variable
+var populateInfoWindow;
+// Keep track of the open InfoWindow
+var openInfoWindow;
+// Keep track of the created icons
+var defaultIcon;
+var highlightedIcon;
 
 // Initialize a map!
 function initMap() {
@@ -146,11 +153,11 @@ function initMap() {
   }
 
   // Style the markers a bit. This will be our listing marker icon.
-  var defaultIcon = makeMarkerIcon('0091ff');
+  defaultIcon = makeMarkerIcon('0091ff');
 
   // Create a "highlighted location" marker color for when the user
   // mouses over the marker.
-  var highlightedIcon = makeMarkerIcon('FF0000');
+  highlightedIcon = makeMarkerIcon('FF0000');
 
   // The following group uses the location array to create an array of markers on initialize.
   for (var i = 0; i < appViewModel.markers.length; i++) {
@@ -171,7 +178,9 @@ function initMap() {
       id: i
     });
     // Push the marker to our array of markers.
-    markers.push(marker);
+    googleMarkers.push(marker);
+    //Rewrite the initial array with our googleMarkers so that they have the visible property.
+    appViewModel.markers[i].marker=marker;
 
     // Create an onclick event to open the large infowindow at each marker.
     marker.addListener('click', function() {
@@ -193,10 +202,15 @@ function initMap() {
   // This function populates the infowindow when the marker is clicked. We'll only allow
   // one infowindow which will open at the marker that is clicked, and populate based
   // on that markers position.
-  function populateInfoWindow(marker, infowindow) {
+  populateInfoWindow = function(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker != marker) {
-      // Clear the infowindow content to give the streetview time to load.
+      // If it is, close it.
+      if (openInfoWindow != null){
+        openInfoWindow.close();
+      };
+
+      // Clear the infowindow content to give the foursquare time to load.
       infowindow.setContent('');
       infowindow.marker = marker;
       // Make sure the marker property is cleared if the infowindow is closed.
@@ -223,7 +237,13 @@ function initMap() {
       });
 
       // Open the infowindow on the correct marker.
+      openInfoWindow = infowindow;
       infowindow.open(map, marker);
+      // Highlight the marker for half a second.
+      marker.setIcon(highlightedIcon);
+      setTimeout(function(){
+        marker.setIcon(defaultIcon);
+      }, 500);
     }
   }
 

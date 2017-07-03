@@ -21,40 +21,6 @@ var appViewModel = {
     new Marker("Sven's Cafe","A great place for sandwiches. Better than LuLu.",42.995846,-87.897095,"4a70672af964a52068d71fe3"),
   ],
 
-  // // List of locations to be handled by the view-model
-  // markers: [
-  //   {
-  //     title : "Cafe India",
-  //     description : "An excellent place for Indian food. My favorite.",
-  //     location : {lat : 43.004400, lng : -87.905661},
-  //     fsquare : "54303fdf498e9bcafb319f80"
-  //   },
-  //   {
-  //     title : "LuLu Cafe",
-  //     description : "A decent place for sandwiches. It does not live up to hype.",
-  //     location : {lat : 43.003370, lng : -87.904936},
-  //     fsquare : "4ad7507cf964a5206d0921e3"
-  //   },
-  //   {
-  //     title : "Odd Duck",
-  //     description : "A vegetarian-friendly tapas place. I'm looking forward to going soon!",
-  //     location : {lat : 43.001990, lng : -87.903207},
-  //     fsquare : "4f844dffe4b0f4019e65d7f8"
-  //   },
-  //   {
-  //     title : "Honeypie",
-  //     description : "A restaurant and bakery. My gluten-free friend says it's her favorite!",
-  //     location : {lat : 42.996787, lng : -87.898616},
-  //     fsquare : "4ad61aa9f964a520180521e3"
-  //   },
-  //   {
-  //     title : "Sven's Cafe",
-  //     description : "A great place for sandwiches. Better than LuLu.",
-  //     location : {lat : 42.995846, lng : -87.897095},
-  //     fsquare : "4a70672af964a52068d71fe3"
-  //   }
-  // ],
-
   //Observable for performing the filter
   searchQuery: ko.observable(''),
 
@@ -64,6 +30,12 @@ var appViewModel = {
 
   // Observable to alert for a map error
   mapError : ko.observable(false),
+
+  openMarkerInfoWindow : function() {
+    //set up a dummy infoWindow so that we can pass it in.
+    var infoWindow = new google.maps.InfoWindow();
+    populateInfoWindow(this.marker, infoWindow);
+  },
 
 
   // Change the toggleMenu and toggleMenuText observables every time the
@@ -83,23 +55,23 @@ var appViewModel = {
 
 }
 
-// // The included restaurants to have markers
-// var markersModel = {
-//   markers: [
-//     new Marker("Cafe India","An excellent place for Indian food. My favorite.",43.004400,-87.905661,"54303fdf498e9bcafb319f80"),
-//     new Marker("LuLu Cafe","A decent place for sandwiches. It does not live up to the hype.",43.003370,-87.904936,"4ad7507cf964a5206d0921e3"),
-//     new Marker("Odd Duck","A vegetarian-friendly tapas place. I'm looking forward to going soon!",43.001990,-87.903207,"4f844dffe4b0f4019e65d7f8"),
-//     new Marker("Honeypie","A restaurant and bakery. My gluten-free friend says it's her favorite!",42.996787,-87.898616,"4ad61aa9f964a520180521e3"),
-//     new Marker("Sven's Cafe","A great place for sandwiches. Better than LuLu.",42.995846,-87.897095,"4a70672af964a52068d71fe3"),
-//   ],
-// };
-
 // The search function using the observable array and searchQuery above
-appViewModel.search = ko.dependentObservable(function() {
+appViewModel.search = ko.computed(function() {
   var self = this;
+  // Convert the search query to lower case to better compare it
   var search = this.searchQuery().toLowerCase();
-  return ko.utils.arrayFilter(self.markers, function(Marker) {
-    return Marker.title.toLowerCase().indexOf(search) >=0;
+  return ko.utils.arrayFilter(self.markers, function(googleMarkers) {
+    // Convert each marker title to lower case
+    var title = googleMarkers.title.toLowerCase();
+    // Do the compare. If the search string matches any bit of the marker title, it is a match.
+    var matched = title.indexOf(search) >= 0;
+    // Set our marker to the corresponding googleMarker.
+    var marker = googleMarkers.marker;
+    // If the marker is in the matched list, make it visible.
+    if (marker) {
+      marker.setVisible(matched);
+    }
+    return googleMarkers.title.toLowerCase().indexOf(search) >=0;
   });
 }, appViewModel);
 
