@@ -53,7 +53,7 @@ var appViewModel = {
     }
   },
 
-}
+};
 
 // The search function using the observable array and searchQuery above
 appViewModel.search = ko.computed(function() {

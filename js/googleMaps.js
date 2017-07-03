@@ -208,7 +208,7 @@ function initMap() {
       // If it is, close it.
       if (openInfoWindow != null){
         openInfoWindow.close();
-      };
+      }
 
       // Clear the infowindow content to give the foursquare time to load.
       infowindow.setContent('');
@@ -230,7 +230,7 @@ function initMap() {
         var photoURL = data.response.photos.items[0].prefix + '150x150' + data.response.photos.items[0].suffix;
         var photographer = data.response.photos.items[0].user.firstName + ' ' + data.response.photos.items[0].user.lastName;
         infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + marker.description +
-         '<div class="infoWindow"><img src=' + photoURL + ' alt=' + marker.title + '> Photo by: ' + photographer + '</div>')
+         '<div class="infoWindow"><img src=' + photoURL + ' alt=' + marker.title + '> Photo by: ' + photographer + '</div>');
       }).fail(function(){
         alert("There was an error with the Foursquare API! Please try again.");
         infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + marker.description + '<div>No FourSquare pictures found!</div>');
@@ -245,10 +245,10 @@ function initMap() {
         marker.setIcon(defaultIcon);
       }, 500);
     }
-  }
+  };
 
-};
+}
 
 mapError = function() {
   appViewModel.mapError(true);
-}
+};

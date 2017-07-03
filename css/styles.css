@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0
+  padding: 0;
   background-color: #427BBC;
 }
 
@@ -26,7 +26,6 @@ html, body {
 .searchResult {
   cursor: pointer;
   border-style: solid;
-  padding: auto;
   margin: 1em;
   text-align: center;
 }
