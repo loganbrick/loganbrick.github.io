@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-  <meta name="description" content="A map of restaurants in the Bayview neighborhood in Milwaukee, WI.">
+  <meta name="description" content="A map of restaurants in the Bay View neighborhood in Milwaukee, WI.">
   <meta name="author" content="Logan Brick">
 
   <title>Logan's Neighborhood</title>
@@ -29,33 +29,11 @@
     <!-- Sidebar -->
     <!-- TODO: Change sidebar show/hide to knockout observable -->
     <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-          <a href="#">
-              Start Bootstrap
-          </a>
-        </li>
-        <li>
-          <a href="#">Dashboard</a>
-        </li>
-        <li>
-          <a href="#">Shortcuts</a>
-        </li>
-        <li>
-          <a href="#">Overview</a>
-        </li>
-        <li>
-          <a href="#">Events</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Services</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
-        </li>
+      <div class="searchbar">
+        <input class="searchbar-input" placeholder="Search!" type="text" name="query" data-bind="value: searchQuery, valueUpdate: 'keyup'">
+      </div>
+      <ul class="sidebar-nav" data-bind="foreach: search">
+        <li data-bind="text: title"></li>
       </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -64,7 +42,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 intro">
-            <h1>Restaurants of Bayview</h1>
+            <h1>Restaurants of Bay View</h1>
             <p>A map of the restaurants I have visited and want to visit.</p>
             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-bind="click: toggleMenuF, text: toggleMenuText"></a>
           </div>
@@ -72,6 +50,10 @@
         <div class="row">
           <div class="col-md-12" id="map"></div>
         </div>
+      </div>
+
+      <div data-bind="visible: mapError">
+        <p>The call to the Google Maps API failed for some reason. Please refresh and try again!</p>
       </div>
 
   </div>
@@ -89,7 +71,9 @@
   <script src="js/googleMaps.js"></script>
 
   <!-- Load in the Google Maps API -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WW1-0yzCWYs211-TzD49v7ZJ0X6EM-w&libraries=places,geometry&v=3&callback=initMap">
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_WW1-0yzCWYs211-TzD49v7ZJ0X6EM-w&libraries=places,geometry&v=3&callback=initMap"
+    async defer onerror="mapError()">
   </script>
 
 </body>

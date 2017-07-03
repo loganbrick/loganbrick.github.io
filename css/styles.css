@@ -10,6 +10,19 @@ html, body {
   padding-bottom: 10px;
 }
 
+.infoWindow {
+  display: block;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.searchbar-input {
+  display: block;
+  margin: 5px auto;
+  background-color: white;
+  opacity: 0.8;
+}
+
 #map {
   height: 80%;
   width: 100%;
