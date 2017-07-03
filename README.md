@@ -19,7 +19,7 @@
 ### Information from:
   * **Advanced Interactive Websites & Google Maps API Lessons [Udacity Lesson](http://udacity.com)**
   * **Slightly modified code taken from Google Maps API Lesson [repository](https://github.com/udacity/ud864)**
-  * **This incredibly helpful [discussion post](https://discussions.udacity.com/t/thinking-through-and-building-the-neighborhood-map-project/220352) on the Udacity Forums
+  * **This incredibly helpful [discussion post](https://discussions.udacity.com/t/thinking-through-and-building-the-neighborhood-map-project/220352) on the Udacity Forums**
 
 
 ## Credit to -
